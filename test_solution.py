@@ -3,6 +3,7 @@ from closestPair import solution
 import random
 from datetime import datetime
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def test_case(length: int = 10000):
@@ -15,7 +16,8 @@ class TestSolution(TestCase):
     def test_solution(self):
         pair_number_list = []
         test_duration_list = []
-        for i in range(1000, 20000, 1000):
+        test_asimpt_list = []
+        for i in range(1000, 21000, 1000):
             with self.subTest(i=i):
                 pair_number_list.append(i)
                 tick = datetime.now()
@@ -25,5 +27,8 @@ class TestSolution(TestCase):
                 diff = tock - tick
                 print(diff.total_seconds(), i)
                 test_duration_list.append(diff.total_seconds())
-        plt.plot(pair_number_list, test_duration_list)
+                test_asimpt_list.append(i * np.log(i))
+        plt.plot(pair_number_list, test_duration_list, 'b')
+        plt.show()
+        plt.plot(pair_number_list, test_asimpt_list, 'r')
         plt.show()
